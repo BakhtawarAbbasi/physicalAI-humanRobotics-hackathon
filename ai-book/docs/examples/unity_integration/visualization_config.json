@@ -1,0 +1,61 @@
+{
+  "visualization_config": {
+    "scene_settings": {
+      "environment": "indoor",
+      "lighting": "realistic",
+      "fog_enabled": false,
+      "fog_density": 0.01
+    },
+    "robot_visualization": {
+      "show_joints": true,
+      "show_links": true,
+      "show_collision_meshes": false,
+      "show_visual_meshes": true,
+      "link_color": "#3498db",
+      "joint_color": "#e74c3c",
+      "transparency": 0.8
+    },
+    "sensor_visualization": {
+      "lidar": {
+        "show_scan": true,
+        "scan_color": "#2ecc71",
+        "point_size": 0.02,
+        "max_range": 30.0
+      },
+      "camera": {
+        "show_frustum": true,
+        "frustum_color": "#9b59b6",
+        "show_image_feed": true
+      },
+      "imu": {
+        "show_orientation": true,
+        "orientation_color": "#f39c12"
+      }
+    },
+    "coordinate_system": {
+      "show_axes": true,
+      "axes_size": 1.0,
+      "x_axis_color": "#e74c3c",
+      "y_axis_color": "#2ecc71",
+      "z_axis_color": "#3498db"
+    },
+    "synchronization": {
+      "update_rate": 30,
+      "interpolation_enabled": true,
+      "interpolation_delay": 0.1,
+      "max_lag_time": 1.0
+    },
+    "network": {
+      "websocket_host": "localhost",
+      "websocket_port": 8765,
+      "reconnect_attempts": 5,
+      "reconnect_delay": 1.0
+    },
+    "ui_elements": {
+      "show_robot_info": true,
+      "show_sensor_data": true,
+      "show_performance_stats": true,
+      "control_panel_position": "bottom_right"
+    }
+  }
+}

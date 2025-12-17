@@ -1,0 +1,8 @@
+{
+  "label": "Module 1 - The Robotic Nervous System (ROS 2)",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn about ROS 2 fundamentals, connecting AI agents to ROS controllers, and creating humanoid robot models with URDF."
+  }
+}

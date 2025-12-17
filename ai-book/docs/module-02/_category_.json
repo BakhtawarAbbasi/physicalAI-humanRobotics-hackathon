@@ -1,0 +1,8 @@
+{
+  "label": "Module 2 - The Digital Twin (Gazebo & Unity)",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn about physics-based simulation and digital twin visualization for Physical AI using Gazebo and Unity."
+  }
+}

@@ -1,0 +1,15 @@
+# physics_params.yaml
+gravity: [0.0, 0.0, -9.81]
+ode_physics:
+  solver_type: world
+  iters: 10
+  sor: 1.0
+  use_dynamic_mmu: false
+  friction_model: pyramid_simplified_friction
+  min_step_size: 0.001
+  max_step_size: 0.01
+  real_time_factor: 1.0
+  max_contacts: 20
+
+collision_detector: bullet
+constraint_solver: ode
