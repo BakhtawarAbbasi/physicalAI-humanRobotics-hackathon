@@ -1,92 +1,312 @@
-# Quickstart Guide: UI Upgrade for ai-book
+# Quickstart Guide: Cleanup & Landing Page UI Upgrade — ai-book
 
-**Feature**: UI Upgrade for "ai-book" (Docusaurus)
-**Date**: 2025-12-16
+**Date**: 2025-12-17
+**Feature**: 001-ui-upgrade
+**Status**: Complete
+
+## Overview
+
+This guide provides the essential steps to implement the UI upgrade for the Physical AI & Humanoid Robotics book website. The process involves removing default Docusaurus content and implementing a professional navy bluish tech theme with redesigned landing page feature cards.
 
 ## Prerequisites
 
-Before starting the UI upgrade, ensure you have:
-
-### System Requirements
 - Node.js (v16 or higher)
 - npm or yarn package manager
 - Git for version control
-- Modern web browser for testing
+- A code editor of your choice
 
-### Project Requirements
-- Access to the ai-book Docusaurus project
-- Understanding of Docusaurus configuration and theming
-- Knowledge of CSS/SCSS for styling customizations
-- Understanding of the existing content structure (modules 1-4)
+## Setup and Installation
 
-## Setup Process
+### 1. Clone and Prepare the Repository
 
-### 1. Clone and Navigate to Project
 ```bash
-# Navigate to the ai-book directory
-cd /path/to/physicalAI-humanRobotics-hackathon/ai-book
+# Navigate to your project directory
+cd your-project-directory
+
+# Ensure you're on the correct branch
+git checkout 001-ui-upgrade
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 # Install project dependencies
 npm install
+# OR if using yarn
+yarn install
 ```
 
-### 3. Start Development Server
+### 3. Verify Current Setup
+
 ```bash
-# Start the Docusaurus development server
-npm start
+# Start the development server to verify current state
+npm run start
+# The site should be accessible at http://localhost:3000
 ```
 
 ## Implementation Steps
 
-### 1. Theme Configuration Updates
-1. Update `docusaurus.config.ts` with new theme settings
-2. Modify color palette and typography settings
-3. Configure new layout options
+### Step 1: Remove Default Content
 
-### 2. Navigation Structure Improvements
-1. Update `sidebars.ts` to enhance module organization
-2. Implement hierarchical structure for modules and chapters
-3. Test navigation flow between different sections
+1. **Delete tutorial-basics directory**:
+   ```bash
+   rm -rf docs/tutorial-basics/
+   ```
 
-### 3. CSS Customizations
-1. Create or update `src/css/custom.css` with new styles
-2. Implement responsive design improvements
-3. Enhance code block and content presentation
+2. **Delete tutorial-extras directory**:
+   ```bash
+   rm -rf docs/tutorial-extras/
+   ```
 
-### 4. Responsive Design Testing
-1. Test layout changes on different screen sizes
-2. Verify mobile navigation functionality
-3. Validate touch interactions on mobile devices
+3. **Remove or disable blog directory**:
+   ```bash
+   # Option A: Remove the blog directory completely
+   rm -rf blog/
 
-## Validation Steps
+   # Option B: If you want to keep the directory but disable the blog,
+   # skip the removal and update the config in the next step
+   ```
 
-To confirm the UI upgrade is working correctly:
+### Step 2: Update Docusaurus Configuration
 
-1. **Visual Check**: Verify the new color scheme, typography, and layout improvements
-2. **Navigation Test**: Ensure all modules and chapters are properly organized and accessible
-3. **Responsive Test**: Check that the site works well on desktop, tablet, and mobile devices
-4. **Content Validation**: Verify all existing content remains accessible and properly formatted
-5. **Performance Check**: Ensure page load times remain acceptable with new visual enhancements
-6. **Accessibility Check**: Verify color contrast and navigation meet accessibility standards
+1. **Edit `docusaurus.config.js`** to remove blog plugin and update theme:
 
-## Common Issues and Solutions
+```javascript
+// Update the plugins array to remove blog plugin if you didn't delete the directory
+// plugins: [
+//   // Remove ['@docusaurus/plugin-content-blog', {...}] if present
+//   // Keep other plugins
+// ],
 
-### Issue: Styles not applying
-- **Solution**: Clear browser cache and restart the development server with `npm start`
+// Add or update the theme configuration for navy bluish theme
+themeConfig: {
+  colorMode: {
+    defaultMode: 'light',
+    disableSwitch: false,
+    respectPrefersColorScheme: true,
+  },
+  navbar: {
+    // Your navbar configuration
+  },
+  footer: {
+    // Your footer configuration
+  },
+  prism: {
+    theme: require('prism-react-renderer/themes/github'),
+    darkTheme: require('prism-react-renderer/themes/dracula'),
+  },
+  // Custom colors for navy bluish theme
+  customCss: require('path').join(__dirname, 'src/css/custom.css'),
+},
+```
 
-### Issue: Navigation not reflecting changes
-- **Solution**: Verify sidebar configuration syntax and restart the development server
+### Step 3: Create Navy Bluish Theme
 
-### Issue: Responsive design not working
-- **Solution**: Check CSS media query syntax and ensure proper breakpoints are defined
+1. **Create or update `src/css/custom.css`**:
+
+```css
+/* Navy Bluish Tech Theme */
+:root {
+  --ifm-color-primary: #1a365d;        /* Navy blue primary */
+  --ifm-color-primary-dark: #152a48;   /* Darker navy */
+  --ifm-color-primary-darker: #12243e; /* Even darker navy */
+  --ifm-color-primary-darkest: #0d182a; /* Darkest navy */
+  --ifm-color-primary-light: #2d4c74;  /* Lighter navy */
+  --ifm-color-primary-lighter: #395c8a; /* Even lighter */
+  --ifm-color-primary-lightest: #4a70a1; /* Lightest navy */
+  --ifm-code-font-size: 95%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+  :root {
+    --ifm-navbar-height: 60px;
+  }
+}
+
+/* Card styling for feature cards */
+.hero-card {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Accessibility improvements */
+.navbar-sidebar__backdrop {
+  backdrop-filter: blur(4px);
+}
+
+/* Custom button styles */
+.button--primary {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-light);
+  border-color: var(--ifm-color-primary-light);
+}
+```
+
+### Step 4: Redesign Landing Page
+
+1. **Create or update `src/pages/index.js`**:
+
+```javascript
+import React from 'react';
+import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import HomepageFeatures from '@site/src/components/HomepageFeatures';
+
+import styles from './index.module.css';
+
+function HomepageHeader() {
+  const {siteConfig} = useDocusaurusContext();
+  return (
+    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <div className="container">
+        <h1 className="hero__title">{siteConfig.title}</h1>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/intro">
+            Get Started
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default function Home() {
+  const {siteConfig} = useDocusaurusContext();
+  return (
+    <Layout
+      title={`Hello from ${siteConfig.title}`}
+      description="Physical AI & Humanoid Robotics Book Documentation">
+      <HomepageHeader />
+      <main>
+        <section className={styles.features}>
+          <div className="container">
+            <div className="row">
+              {/* Feature Card 1 */}
+              <div className="col col--4">
+                <div className="text--center padding-horiz--md">
+                  <h2>Physical AI & Embodied Intelligence</h2>
+                  <p>
+                    Explore the intersection of artificial intelligence and physical systems.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature Card 2 */}
+              <div className="col col--4">
+                <div className="text--center padding-horiz--md">
+                  <h2>Humanoid Robotics & Simulation</h2>
+                  <p>
+                    Learn about humanoid robot design, control systems, and simulation environments.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature Card 3 */}
+              <div className="col col--4">
+                <div className="text--center padding-horiz--md">
+                  <h2>AI-to-Physical World Integration</h2>
+                  <p>
+                    Understand how AI systems interact with and control physical environments.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+}
+```
+
+### Step 5: Update Sidebar Configuration
+
+1. **Edit `sidebars.js`** to remove references to deleted content:
+
+```javascript
+// Remove any references to tutorial-basics and tutorial-extras
+module.exports = {
+  docs: [
+    // Keep only the documentation sections that remain
+    // Remove any references to:
+    // - 'tutorial-basics/...'
+    // - 'tutorial-extras/...'
+    // Keep your Physical AI & Humanoid Robotics content
+    {
+      type: 'category',
+      label: 'Physical AI & Humanoid Robotics',
+      items: [
+        // Your book content here
+      ],
+    },
+  ],
+};
+```
+
+### Step 6: Validate Implementation
+
+1. **Test the site locally**:
+   ```bash
+   npm run start
+   ```
+
+2. **Build the site to verify production build**:
+   ```bash
+   npm run build
+   ```
+
+3. **Serve the build locally to test**:
+   ```bash
+   npm run serve
+   ```
+
+## Verification Checklist
+
+- [ ] Tutorial-basics directory removed
+- [ ] Tutorial-extras directory removed
+- [ ] Blog directory removed or disabled
+- [ ] Navy bluish theme applied consistently
+- [ ] Landing page shows three feature cards with correct titles
+- [ ] Responsive design works on mobile, tablet, and desktop
+- [ ] All existing content remains accessible
+- [ ] Site builds without errors
+- [ ] Navigation structure updated to remove deleted content
+- [ ] Color contrast meets WCAG AA standards
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Missing content after deletion**: Verify that you only removed default Docusaurus content, not the Physical AI & Humanoid Robotics book content.
+
+2. **Theme not applying**: Check that `custom.css` is properly referenced in `docusaurus.config.js`.
+
+3. **Build errors**: Run `npm run build` to see detailed error messages and address them accordingly.
+
+4. **Navigation broken**: Verify that `sidebars.js` only references existing content paths.
 
 ## Next Steps
 
-After completing the UI upgrade:
-1. Run a full build with `npm run build` to ensure everything works in production mode
-2. Test the built version locally with `npm run serve`
-3. Review all content to ensure nothing was inadvertently changed or broken
-4. Get feedback from users on the new design and navigation
+After completing this quickstart:
+1. Test thoroughly on different devices and browsers
+2. Review accessibility compliance using tools like axe-core
+3. Optimize images and assets for performance
+4. Prepare for deployment to production environment

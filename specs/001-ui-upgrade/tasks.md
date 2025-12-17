@@ -1,13 +1,13 @@
 ---
-description: "Task list for UI Upgrade implementation"
+description: "Task list for Cleanup & Landing Page UI Upgrade feature implementation"
 ---
 
-# Tasks: UI Upgrade for "ai-book" (Docusaurus)
+# Tasks: Cleanup & Landing Page UI Upgrade — ai-book
 
 **Input**: Design documents from `/specs/001-ui-upgrade/`
-**Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, quickstart.md
+**Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: No explicit test requirements in specification - tests are not included.
+**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -19,83 +19,89 @@ description: "Task list for UI Upgrade implementation"
 
 ## Path Conventions
 
-- **Documentation**: `docs/module-04/` for module content, `sidebars.ts` for navigation, `src/css/` for styling
+- **Docusaurus project**: `docs/`, `blog/`, `src/`, `static/` at repository root
+- **Configuration**: `docusaurus.config.js`, `sidebars.js` at repository root
+- **CSS**: `src/css/custom.css`
+- **Pages**: `src/pages/index.js`
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-**Purpose**: Project initialization and basic documentation structure
+**Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create src/css/ directory for custom styles
-- [x] T002 [P] Create placeholder files for custom CSS styling
-- [x] T003 Verify Docusaurus project exists and is functional
+- [X] T001 Verify project structure and dependencies per plan.md
+- [X] T002 [P] Install Docusaurus dependencies with npm install
+- [X] T003 [P] Verify development server starts with npm run start
 
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: Core documentation infrastructure that MUST be complete before ANY user story can be implemented
+**Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [x] T004 Update docusaurus.config.ts with new theme configuration options
-- [x] T005 [P] Create custom.css file with basic structure for styling overrides
-- [x] T006 Update sidebars.ts to prepare for enhanced navigation structure
-- [x] T007 Verify documentation build process works with new configuration
+- [X] T004 Verify current site structure and identify default Docusaurus content locations
+- [X] T005 [P] Create backup of current configuration files (docusaurus.config.js, sidebars.js)
+- [X] T006 [P] Create backup of current homepage (src/pages/index.js if exists)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
 ---
 
-## Phase 3: User Story 1 - Enhanced Visual Design and Readability (Priority: P1) 🎯 MVP
+## Phase 3: User Story 1 - Clean Up Default Docusaurus Content (Priority: P1) 🎯 MVP
 
-**Goal**: Create comprehensive visual enhancements for improved readability and modern appearance that focuses on typography, spacing, and color contrast for optimal learning experience
+**Goal**: Remove default Docusaurus content (tutorial-basics, tutorial-extras, blog) so readers see only book-related content without confusion.
 
-**Independent Test**: Students can navigate through any module and chapter with improved readability, better typography, proper spacing, and enhanced color contrast that reduces eye strain and improves comprehension.
+**Independent Test**: Reader visits the site and sees only book-related content without any default Docusaurus tutorial content in docs/tutorial-basics/, docs/tutorial-extras/, or blog sections.
 
 ### Implementation for User Story 1
 
-- [x] T008 [P] [US1] Create custom.css with improved color palette and typography definitions
-- [x] T009 [P] [US1] Add enhanced typography styles to src/css/custom.css
-- [x] T010 [US1] Implement improved spacing and layout in src/css/custom.css
-- [x] T011 [US1] Add enhanced color contrast for readability in src/css/custom.css
-- [x] T012 [US1] Update docusaurus.config.ts with new theme colors and fonts
-- [x] T013 [US1] Add light/dark mode enhancements to src/css/custom.css
+- [X] T007 [US1] Delete docs/tutorial-basics/ directory and all its contents
+- [X] T008 [US1] Delete docs/tutorial-extras/ directory and all its contents
+- [X] T009 [US1] Delete blog/ directory to remove blog functionality completely
+- [X] T010 [US1] Update docusaurus.config.js to remove blog plugin if present
+- [X] T011 [US1] Update sidebars.js to remove references to deleted content
+- [X] T012 [US1] Verify all internal links still work correctly after content removal
+- [X] T013 [US1] Test site builds successfully after content cleanup
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
 ---
 
-## Phase 4: User Story 2 - Improved Navigation and Information Architecture (Priority: P2)
+## Phase 4: User Story 2 - Enhanced Landing Page with Robotics-Focused Cards (Priority: P2)
 
-**Goal**: Create improved navigation structure that clearly organizes modules (Module 1-4) with intuitive navigation elements for easy access to content
+**Goal**: Create a modern, professional landing page with three specific feature cards about Physical AI, Humanoid Robotics, and AI-to-Physical World Integration.
 
-**Independent Test**: Students can easily navigate between different modules (1-4) and chapters within each module using clear, intuitive navigation elements without getting lost or confused.
+**Independent Test**: Reader lands on the homepage and sees three clearly designed feature cards with the specified topics: Physical AI & Embodied Intelligence, Humanoid Robotics & Simulation, and AI-to-Physical World Integration.
 
 ### Implementation for User Story 2
 
-- [x] T014 [P] [US2] Update sidebars.ts with improved hierarchical structure for modules
-- [x] T015 [P] [US2] Add collapsible category sections for each module in sidebars.ts
-- [x] T016 [US2] Improve navbar structure in docusaurus.config.ts for module organization
-- [x] T017 [US2] Add module-specific navigation helpers in src/css/custom.css
-- [x] T018 [US2] Document navigation improvements in quickstart guide
-- [x] T019 [US2] Add breadcrumbs for improved navigation context
+- [X] T014 [P] [US2] Create new homepage component in src/pages/index.js with feature cards
+- [X] T015 [P] [US2] Implement first feature card: Physical AI & Embodied Intelligence
+- [X] T016 [P] [US2] Implement second feature card: Humanoid Robotics & Simulation
+- [X] T017 [P] [US2] Implement third feature card: AI-to-Physical World Integration
+- [X] T018 [US2] Ensure landing page design is responsive and readable on all devices
+- [X] T019 [US2] Verify feature card titles match exactly: "Physical AI & Embodied Intelligence", "Humanoid Robotics & Simulation", "AI-to-Physical World Integration"
+
+**Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
 ---
 
-## Phase 5: User Story 3 - Responsive Design and Accessibility Enhancement (Priority: P3)
+## Phase 5: User Story 3 - Professional UI Theme Implementation (Priority: P3)
 
-**Goal**: Implement responsive design that works seamlessly on desktop, tablet, and mobile devices while ensuring accessibility compliance
+**Goal**: Implement a professional, modern, navy bluish tech-themed interface for consistent visual experience across the site.
 
-**Independent Test**: Students can access and interact with all content effectively on desktop, tablet, and mobile devices without loss of functionality or degraded user experience.
+**Independent Test**: Reader experiences the entire site with a unified navy bluish tech theme that feels professional and modern while maintaining readability and usability.
 
 ### Implementation for User Story 3
 
-- [x] T020 [P] [US3] Add responsive breakpoints to src/css/custom.css
-- [x] T021 [P] [US3] Implement mobile navigation improvements in src/css/custom.css
-- [x] T022 [US3] Add tablet-specific layout adjustments to src/css/custom.css
-- [x] T023 [US3] Implement accessibility enhancements (contrast, focus) in src/css/custom.css
-- [x] T024 [US3] Add touch-friendly interface elements to src/css/custom.css
-- [x] T025 [US3] Validate responsive functionality across different screen sizes
+- [X] T020 [P] [US3] Define navy bluish color palette in CSS variables in src/css/custom.css
+- [X] T021 [P] [US3] Implement primary theme colors: --ifm-color-primary: #1a365d
+- [X] T022 [P] [US3] Implement secondary and accent colors for the navy bluish theme
+- [X] T023 [US3] Apply theme consistently across all site components
+- [X] T024 [US3] Ensure color contrast meets WCAG AA compliance (minimum 4.5:1)
+- [X] T025 [US3] Test theme across different browsers and devices
+- [X] T026 [US3] Update docusaurus.config.js to use new color scheme
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -105,13 +111,13 @@ description: "Task list for UI Upgrade implementation"
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [x] T026 [P] Add cross-references and navigation links between chapters
-- [x] T027 [P] Review and standardize formatting across all module files
-- [x] T028 Add prerequisites and system requirements section to each module
-- [x] T029 [P] Update homepage layout with enhanced call-to-action sections
-- [x] T030 Validate all existing content remains accessible after changes
-- [x] T031 [P] Add summary and next-steps sections to each module
-- [x] T032 Run Docusaurus build to ensure all documentation renders correctly
+- [X] T027 [P] Update documentation to reflect new site structure in README.md
+- [X] T028 Code cleanup and refactoring of CSS and component code
+- [X] T029 [P] Run accessibility tests to ensure WCAG compliance
+- [X] T030 Performance optimization to maintain <3 second load times
+- [X] T031 [P] Cross-browser testing on Chrome, Firefox, Safari, Edge
+- [X] T032 Run quickstart.md validation steps to ensure all works correctly
+- [X] T033 Final site build and serve test to verify production build works
 
 ---
 
@@ -129,12 +135,12 @@ description: "Task list for UI Upgrade implementation"
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
-- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - May reference US1 concepts but should be independently testable
-- **User Story 3 (P3)**: Can start after Foundational (Phase 2) - May reference US1/US2 concepts but should be independently testable
+- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - Depends on US1 (content cleanup) being complete
+- **User Story 3 (P3)**: Can start after Foundational (Phase 2) - Can work in parallel with US1/US2 but should be independently testable
 
 ### Within Each User Story
 
-- Core implementation before examples and exercises
+- Core implementation before integration
 - Story complete before moving to next priority
 
 ### Parallel Opportunities
@@ -142,17 +148,18 @@ description: "Task list for UI Upgrade implementation"
 - All Setup tasks marked [P] can run in parallel
 - All Foundational tasks marked [P] can run in parallel (within Phase 2)
 - Once Foundational phase completes, all user stories can start in parallel (if team capacity allows)
-- All tests for a user story marked [P] can run in parallel
+- Models within a story marked [P] can run in parallel
 - Different user stories can be worked on in parallel by different team members
 
 ---
 
-## Parallel Example: User Story 1
+## Parallel Example: User Story 2
 
 ```bash
-# Launch all User Story 1 tasks together:
-Task: "Create custom.css with improved color palette and typography definitions"
-Task: "Add enhanced typography styles to src/css/custom.css"
+# Launch all feature cards for User Story 2 together:
+Task: "Implement first feature card: Physical AI & Embodied Intelligence in src/pages/index.js"
+Task: "Implement second feature card: Humanoid Robotics & Simulation in src/pages/index.js"
+Task: "Implement third feature card: AI-to-Physical World Integration in src/pages/index.js"
 ```
 
 ---
@@ -191,9 +198,9 @@ With multiple developers:
 ## Notes
 
 - [P] tasks = different files, no dependencies
-- [US1/US2/US3] label maps task to specific user story for traceability
+- [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
+- Verify tests fail before implementing
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
-- All styling must enhance readability and accessibility for educational content
-- Changes must maintain fast loading times despite visual enhancements
+- Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
