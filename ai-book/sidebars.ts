@@ -46,11 +46,12 @@ const sidebars: SidebarsConfig = {
   module03Sidebar: [
     {
       type: 'category',
-      label: 'Module 3 - The AI-Robot Brain (NVIDIA Isaac™)',
+      label: 'Module03 – ISAAC AI Brain',
       items: [
-        'module-03/isaac-ai-brain/isaac-sim',
-        'module-03/isaac-ai-brain/isaac-ros',
-        'module-03/isaac-ai-brain/nav2-navigation',
+        'module-03/isaac-sim',
+        'module-03/isaac-ros',
+        'module-03/nav2-navigation',
+        'module-03/quickstart',
       ],
     },
   ],
@@ -59,11 +60,11 @@ const sidebars: SidebarsConfig = {
   module04Sidebar: [
     {
       type: 'category',
-      label: 'Module 4 - Vision-Language-Action (VLA)',
+      label: 'Module04 – Voice to Action',
       items: [
-        'module-04/vla/voice-to-action',
-        'module-04/vla/cognitive-planning',
-        'module-04/vla/capstone',
+        'module-04/voice-to-action',
+        'module-04/cognitive-planning',
+        'module-04/capstone',
       ],
       collapsed: false,  // Expand by default for better visibility
     },

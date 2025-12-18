@@ -63,7 +63,7 @@ const config: Config = {
       title: 'physicalAI',
       logo: {
         alt: 'physicalAI Book Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
       items: [
         {
@@ -141,7 +141,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()}, Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
