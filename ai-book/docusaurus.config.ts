@@ -108,40 +108,54 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Modules',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Module 1 - Physical AI & Embodied Intelligence',
+              to: '/docs/module-01/chapter-1-ros2-fundamentals',
+            },
+            {
+              label: 'Module 2 - Humanoid Robotics & Simulation',
+              to: '/docs/module-02/chapter-1-gazebo-physics',
+            },
+            {
+              label: 'Module 3 - AI-to-Physical World Integration',
+              to: '/docs/module-03/isaac-sim',
+            },
+            {
+              label: 'Module 4 - Voice to Action & Cognitive Planning',
+              to: '/docs/module-04/voice-to-action',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Resources',
           items: [
             {
-              label: 'Linkedin',
+              label: 'Introduction',
+              to: '/docs/intro',
+            },
+            {
+              label: 'GitHub Repository',
+              href: 'https://github.com/BakhtawarAbbasi/physicalAI-humanRobotics-hackathon',
+            },
+          ],
+        },
+        {
+          title: 'Connect',
+          items: [
+            {
+              label: 'LinkedIn',
               href: 'https://www.linkedin.com/in/bakhtawar-abbasi-59ba15304/',
             },
-            
             {
-              label: 'X',
+              label: 'Twitter/X',
               href: 'https://x.com/Bakhtawar160419',
             },
           ],
         },
-        {
-          title: 'More',
-          items: [
-            
-            {
-              label: 'GitHub',
-              href: 'https://github.com/BakhtawarAbbasi',
-            },
-          ],
-        },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()}, Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Book. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

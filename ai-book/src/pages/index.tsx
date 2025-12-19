@@ -43,7 +43,7 @@ function ModuleCard({ title, description, icon, link }: { title: string; descrip
         </p>
         {link && (
           <div className="module-card__footer">
-            <Link className="button button--secondary" to={link}>
+            <Link className="button button--primary" to={link}>
               Explore Module
             </Link>
           </div>
@@ -78,6 +78,11 @@ export default function Home(): ReactNode {
                 title="AI-to-Physical World Integration"
                 description="Understand how AI systems interact with and control physical environments, bridging the gap between digital intelligence and physical reality."
                 link="/docs/module-03/isaac-sim"
+              />
+              <ModuleCard
+                title="Voice to Action & Cognitive Planning"
+                description="Discover how voice commands are processed and transformed into robotic actions, with advanced cognitive planning for complex task execution."
+                link="/docs/module-04/voice-to-action"
               />
             </div>
           </div>
