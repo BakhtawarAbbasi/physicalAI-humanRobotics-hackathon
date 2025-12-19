@@ -3,46 +3,40 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
 }
 
-.features {
-  padding: 2rem 0;
+.buttons .button {
+  min-width: 200px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.modules {
+  padding: var(--spacing-2xl) 0;
   width: 100%;
 }
 
-.featureCard {
-  height: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.featureCard:hover {
-  transform: translateY(-5px);
-}
-
-.featureCardTitle {
-  margin-bottom: 1rem;
-  color: var(--ifm-heading-color);
-}
-
+/* Responsive adjustments */
 @media screen and (max-width: 996px) {
-  .featureCard {
-    margin-bottom: 2rem;
+  .buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .buttons .button {
+    min-width: auto;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .modules {
+    padding: var(--spacing-xl) 0;
   }
 }

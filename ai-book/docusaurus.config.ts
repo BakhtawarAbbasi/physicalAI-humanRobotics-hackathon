@@ -70,7 +70,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Intro',
         },
         {
           type: 'docSidebar',
@@ -98,7 +98,7 @@ const config: Config = {
         },
 
         {
-          href: 'https://github.com/BakhtawarAbbasi/ai-book',
+          href: 'https://github.com/BakhtawarAbbasi/physicalAI-humanRobotics-hackathon',
           label: 'GitHub',
           position: 'right',
         },
