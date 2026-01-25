@@ -1,0 +1,81 @@
+# API Contract: RAG Ingestion Pipeline
+
+## Endpoints
+
+### POST /ingest
+**Description**: Trigger the content ingestion pipeline
+
+**Request Body**:
+```json
+{
+  "urls": ["https://example-docusaurus-site.com"],
+  "config": {
+    "chunk_size": 1000,
+    "chunk_overlap": 200,
+    "max_concurrent_requests": 5,
+    "request_delay": 1.0
+  }
+}
+```
+
+**Response**:
+```json
+{
+  "job_id": "uuid-string",
+  "status": "pending",
+  "urls_to_process": 1,
+  "estimated_duration": "5-10 minutes"
+}
+```
+
+### GET /ingest/{job_id}
+**Description**: Get the status of an ingestion job
+
+**Response**:
+```json
+{
+  "job_id": "uuid-string",
+  "status": "completed",
+  "processed_count": 25,
+  "failed_count": 0,
+  "start_time": "2025-12-25T10:00:00Z",
+  "end_time": "2025-12-25T10:05:30Z",
+  "progress": 100
+}
+```
+
+### POST /embed
+**Description**: Generate embeddings for text content
+
+**Request Body**:
+```json
+{
+  "content_chunks": [
+    {
+      "id": "chunk-uuid",
+      "content": "Text content to embed",
+      "metadata": {
+        "source_url": "https://source-url.com",
+        "title": "Page Title"
+      }
+    }
+  ]
+}
+```
+
+**Response**:
+```json
+{
+  "status": "success",
+  "embedded_chunks": [
+    {
+      "id": "chunk-uuid",
+      "vector_dimension": 1024,
+      "metadata": {
+        "source_url": "https://source-url.com",
+        "title": "Page Title"
+      }
+    }
+  ]
+}
+```

@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: RAG Agent API
+  version: 1.0.0
+  description: API for interacting with the RAG agent that retrieves information from book content
+
+paths:
+  /query:
+    post:
+      summary: Submit a query to the RAG agent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The question or query to submit to the agent
+                  example: "What is Gazebo physics simulation?"
+                top_k:
+                  type: integer
+                  description: Number of top results to retrieve
+                  default: 5
+                  example: 5
+      responses:
+        '200':
+          description: Successful response from the agent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The agent's response to the query
+                    example: "Gazebo physics simulation is a..."
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: List of source URLs used to generate the response
+                    example: ["https://example.com/docs/gazebo-physics"]
+                  confidence:
+                    type: number
+                    format: float
+                    description: Confidence score based on content match quality
+                    example: 0.95
+                  retrieved_chunks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        content:
+                          type: string
+                          description: The retrieved content chunk
+                        source_url:
+                          type: string
+                          description: URL of the source document
+                        title:
+                          type: string
+                          description: Title of the source document
+                        score:
+                          type: number
+                          format: float
+                          description: Similarity score

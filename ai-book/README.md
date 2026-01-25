@@ -2,6 +2,10 @@
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator. This repository contains an AI/Spec-Driven Technical Book with integrated RAG chatbot, focusing on Physical AI and humanoid robotics.
 
+## Floating Chatbot Assistant
+
+This book features an integrated floating chatbot assistant that provides in-page assistance while you read. The chatbot is accessible via the floating icon at the bottom-right corner of every page. Click the icon to open the chat panel and ask questions about the book content - the assistant will provide answers based on the Physical AI & Humanoid Robotics material.
+
 ## Module 1 - The Robotic Nervous System (ROS 2)
 
 This module introduces ROS 2 as the middleware (robotic nervous system) for humanoid robots, enabling students to control simulated robots and bridge AI agents to physical actions.

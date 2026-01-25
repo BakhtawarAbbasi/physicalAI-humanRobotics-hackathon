@@ -162,6 +162,39 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+
+  // Add the Root component to wrap the entire app
+  themes: [],
+  stylesheets: [],
+
+    // Client modules to load
+  clientModules: [
+    './src/Root.tsx',
+  ],
+
+  // Additional configuration
+  headTags: [
+    // Add meta tag for API URL
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'chatbot-api-url',
+        content: 'http://localhost:8000',
+      },
+    },
+    // Add inline script to set the API URL globally
+    {
+      tagName: 'script',
+      attributes: { type: 'text/javascript' },
+      innerHTML: `
+        if (typeof window !== 'undefined') {
+          window.chatbotConfig = {
+            apiBaseUrl: 'http://localhost:8000'
+          };
+        }
+      `,
+    },
+  ],
 };
 
 export default config;

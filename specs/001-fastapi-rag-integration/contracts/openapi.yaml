@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: RAG Agent API
+  version: 1.0.0
+  description: API for interacting with the RAG agent that retrieves information from book content
+
+paths:
+  /query:
+    post:
+      summary: Process a user query through the RAG agent
+      description: Sends a query to the RAG agent which retrieves relevant content from Qdrant and generates a response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Successful response from the RAG agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error during query processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the API server
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-12-25T10:00:00Z"
+
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user's question or query
+          example: "What is Gazebo physics simulation?"
+        top_k:
+          type: integer
+          description: Number of top results to retrieve (optional, default: 5)
+          example: 5
+          minimum: 1
+          maximum: 20
+
+    QueryResponse:
+      type: object
+      required:
+        - answer
+        - sources
+        - retrieved_chunks
+        - success
+      properties:
+        answer:
+          type: string
+          description: The agent's response to the query
+          example: "Gazebo physics simulation provides realistic simulation of robots in 3D environments with accurate physics modeling..."
+        sources:
+          type: array
+          description: List of source URLs for the retrieved content
+          items:
+            type: string
+          example: ["https://example.com/docs/module-02/chapter-1-gazebo-physics"]
+        retrieved_chunks:
+          type: array
+          description: Details about the content chunks that informed the response
+          items:
+            $ref: '#/components/schemas/RetrievedChunk'
+        success:
+          type: boolean
+          description: Whether the query was processed successfully
+          example: true
+        error_message:
+          type: string
+          description: Error message if the request failed (optional)
+          example: null
+
+    RetrievedChunk:
+      type: object
+      required:
+        - content
+        - source_url
+        - title
+        - score
+        - chunk_index
+      properties:
+        content:
+          type: string
+          description: The actual content text retrieved from the vector store
+          example: "Gazebo provides realistic physics simulation with features such as collision detection, rigid body dynamics, and sensor simulation."
+        source_url:
+          type: string
+          description: The URL where the original content was sourced from
+          example: "https://example.com/docs/module-02/chapter-1-gazebo-physics"
+        title:
+          type: string
+          description: The title of the source document
+          example: "Chapter 1 - Gazebo Physics Simulation"
+        score:
+          type: number
+          format: float
+          description: The similarity score for this retrieval result
+          example: 0.85
+        chunk_index:
+          type: integer
+          description: The position of this chunk within the original document
+          example: 0
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - type
+        - status_code
+      properties:
+        error:
+          type: string
+          description: The error message
+          example: "Failed to process query due to service unavailability"
+        type:
+          type: string
+          description: The error type
+          example: "service_unavailable"
+        status_code:
+          type: integer
+          description: The HTTP status code
+          example: 500
+        details:
+          type: object
+          description: Additional error details (optional)
+          example: {"service": "qdrant", "reason": "connection_failed"}
